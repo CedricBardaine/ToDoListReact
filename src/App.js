@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import TodoList from './TodoList' ; 
 import TodoItems from './TodoItems' ; 
@@ -18,7 +17,7 @@ class App extends Component {
     this.setState({
       currentItem,
     });
-    console.log('Hello Input') ; 
+    console.log('You are writing a new task :)') ; 
   }
   addItem = e => {
     e.preventDefault() ;
@@ -31,19 +30,26 @@ class App extends Component {
         currentItem: {text: '' , key: ''} ,
       })
     }
-    console.log('Hello add item') ; 
+    console.log('You clicked on the Add Task button :)') ; 
   }
-
+  
   deleteItem = key => {
-    const filteredItems = this.state.items.filter(item => {
-      return item.key !== key
-    })
-    this.setState ({
-      items: filteredItems,
-    })
+    let tasktodelete  ;
+    this.state.items.forEach(item => {
+      if ( item.key === key) tasktodelete = item ; 
+    });
+    if ( window.confirm("Are you sure to delete " + tasktodelete.text ) ) {
+      
+      const filteredItems = this.state.items.filter(item => {
+        return item.key !== key
+      })
+      this.setState ({
+        items: filteredItems,
+      })
+    }
   }
-
-
+  
+  
   inputElement = React.createRef() ;
   
   render() { return (
@@ -54,7 +60,7 @@ class App extends Component {
     handleInput = {this.handleInput}
     currentItem = {this.state.currentItem} 
     />
-
+    
     <TodoItems 
     entries = {this.state.items} 
     deleteItem={this.deleteItem}

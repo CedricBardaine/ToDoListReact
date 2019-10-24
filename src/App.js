@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import './App.css';
 import TodoList from './TodoList' ; 
 import TodoItems from './TodoItems' ; 
+import './alertify.min.css';
+import './alertify-bootstrap.min.css';
+import alertify from 'alertifyjs';
 
 class App extends Component {
   constructor() {
@@ -38,37 +41,43 @@ class App extends Component {
     this.state.items.forEach(item => {
       if ( item.key === key) tasktodelete = item ; 
     });
-    if ( window.confirm("Are you sure to delete " + tasktodelete.text ) ) {
-      
-      const filteredItems = this.state.items.filter(item => {
-        return item.key !== key
-      })
-      this.setState ({
-        items: filteredItems,
-      })
-    }
-  }
-  
-  
-  inputElement = React.createRef() ;
-  
-  render() { return (
-    <div className="App">
-    <TodoList 
-    addItem={this.addItem} 
-    inputElement= {this.inputElement} 
-    handleInput = {this.handleInput}
-    currentItem = {this.state.currentItem} 
-    />
     
-    <TodoItems 
-    entries = {this.state.items} 
-    deleteItem={this.deleteItem}
-    />
-    </div>
-    ); 
+    var thisApp = this; 
+    
+    alertify.confirm("Please confirm..." , "Are you sure to delete : <b>" + tasktodelete.text + "</b>", 
+    function(){  
+      const filteredItems = thisApp.state.items.filter(item => {
+        return item.key !== key
+      }) ; 
+      thisApp.setState ({
+        items: filteredItems,
+      }) ; 
+      alertify.success('Task deleted') ; } 
+      , 
+      function() { alertify.error('Canceled') ; }
+      ) ;      
+    }
+    
+    
+    inputElement = React.createRef() ;
+    
+    render() { return (
+      <div className="App">
+      <TodoList 
+      addItem={this.addItem} 
+      inputElement= {this.inputElement} 
+      handleInput = {this.handleInput}
+      currentItem = {this.state.currentItem} 
+      />
+      
+      <TodoItems 
+      entries = {this.state.items} 
+      deleteItem={this.deleteItem}
+      />
+      </div>
+      ); 
+    }
+    
   }
   
-}
-
-export default App;
+  export default App;

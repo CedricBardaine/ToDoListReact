@@ -20,3 +20,34 @@
 .App-link {
   color: #09d3ac;
 }
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #669C5E ;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(102, 156, 94, 0.25);
+}
+/* 
+.custom-select:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+} */
+
+.list-group-item:hover {
+  background-color: rgba(102, 156, 94, 0.25) ;
+  transition-duration : 400ms ; 
+  
+}
+.list-group-item {
+  transition-duration: 400ms;
+}
+
+.btn-success {
+  background-color: #669C5E ;
+  min-width: 100%;
+}
+.btn-success:hover {
+  background-color: #527d4b ;
+}

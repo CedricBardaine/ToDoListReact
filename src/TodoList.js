@@ -9,16 +9,19 @@ class TodoList extends Component {
     render() { return (
         <div className="todoListMain">
         <div className="header">
-        <form onSubmit={this.props.addItem}>
+        <form className="form-group" onSubmit={this.props.addItem}>
         <input 
+        className="form-control"
         type="text" 
-        placeholder="Task"
+        placeholder="example : Forking someone's repo"
         ref = {this.props.inputElement} 
         value={this.props.currentItem.text}
         onChange={this.props.handleInput}
         />
-        <button type="submit"> Add Task </button>
+        
+        <button className="btn btn-success" type="submit">  Add Task  </button>
         </form>
+        <br/>
         </div>
         </div>
         )

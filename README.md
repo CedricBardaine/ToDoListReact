@@ -43,4 +43,4 @@ function getSurveyOfClicks(array) {
 }
 getSurveyOfClicks(trackingData)
 ```
-to have an example of a random summary about the collected data. 
+to have an example of a random summary about the collected data.
